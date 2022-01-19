@@ -14,15 +14,14 @@ function addname(string $name) {
                     
         $query->bindValue(':name',$name, PDO::PARAM_STR);
         
-        $query->execute();
-
+        return $query->execute();
 
     } catch(PDOException $e){
         return "Erreur : " . $e->getMessage();
     }
 }
 
-// Enlève les espaces dans le formulaire et évite qu'il y aie du script dans les inputs
+// Enlève les espaces dans le formulaire et évite qu'il y ait du script dans les inputs
 
 function valid_data($data) {
 
@@ -46,12 +45,29 @@ if($_POST){
 
             $name = valid_data($_POST['name']);
            
+            $result = addname($name);
             
-            addname($name);
-            
-            $_SESSION['message'] = "Membre d'équipage ajouté !";
-            header('Location: http://localhost/dev-tech-challenge/php/home.php');
-            }else{
-            $_SESSION['erreur'] = "Le formulaire est incomplet";
+            $last_url = $_SERVER['HTTP_REFERER'];
+
+            if(strpos($last_url, '?') !== FALSE) {
+                $req_get = strrchr($last_url, '?');
+                $last_url = str_replace($req_get, '', $last_url);
             }
-        }   
+
+            if($result) {
+                
+                $msg = "Membre d'équipage ajouté !";
+
+                header("Location: $last_url?msg=$msg");
+            }else{
+                
+                $msg = "Une erreur est survenue";
+
+                header("Location: $last_url?error-msg=$msg");
+            }
+        }else{
+            $msg = "Le formulaire est incomplet";
+
+            header("Location: $last_url?error-msg=$msg");
+            }
+    }   

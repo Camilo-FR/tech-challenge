@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+/**********/
+/* Global */
+/**********/
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -9,12 +13,17 @@ body {
     rgba(253, 187, 45, 1) 0%,
     rgba(34, 193, 195, 1) 100%
   );
+  height: 100%;
 }
 
 main {
   max-width: 960px;
   margin: 0 auto;
 }
+
+/**********/
+/* HEADER */
+/**********/
 
 header {
   background: rgba(34, 193, 195, 1);
@@ -64,14 +73,29 @@ header h1 {
   font-size: 2.5em;
 }
 
+/********/
+/* MAIN */
+/********/
+
 h1,
 h2 {
   text-align: center;
+  color: #f76c6c;
 }
 
 .lottie-svg {
+  margin-top: 9%;
   display: flex;
   justify-content: center;
+}
+
+.intro {
+  margin: 3em 0;
+}
+
+.intro p {
+  text-align: justify;
+  line-height: 1.5em;
 }
 
 label {
@@ -110,14 +134,22 @@ input:focus {
 .error-msg {
   background-color: #f76c6c;
   font-weight: bold;
+  text-align: center;
+  padding: 6px;
+  border-radius: 15px;
 }
 
 .success-msg {
   background-color: seagreen;
   font-weight: bold;
+  text-align: center;
+  padding: 6px;
+  border-radius: 15px;
 }
 
 .member-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   text-align: center;
 }
 
@@ -129,12 +161,19 @@ ul {
   padding: 0.25em 0;
 }
 
+/**********/
+/* FOOTER */
+/**********/
+
 footer {
-  margin-top: 2em;
+  margin-top: 5em;
   text-align: center;
   color: #fff;
   background: #f76c6c;
   padding: 0.25em 0;
+  width: 100%;
+  /* position: absolute;
+  bottom: 0; */
 }
 
 /* Back to top */
@@ -185,6 +224,17 @@ footer {
   opacity: 1;
   visibility: visible;
 }
+
+/* Tablette */
+
+@media screen and (max-width: 1024px) {
+  .intro p {
+    width: 75%;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile */
 
 @media screen and (max-width: 500px) {
   nav {

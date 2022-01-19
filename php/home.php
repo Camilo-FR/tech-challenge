@@ -1,11 +1,4 @@
 <?php
-
-// session_start();
-
-// $newsession = '';
-
-// $_SESSION["user"] = $newsession; 
-
 require_once('connect.php');
 require('add.php');
 
@@ -56,44 +49,47 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <a href="#" id="back-to-top"></a>
+
+  <div class="intro">
+    <h2>Grèce antique, 515 avant JC.</h2>
+    <p>
+      Quelque part, au beau milieu des cyclades, à 500 kilomètres de Iolcos...
+      Tranquillement installé sur un transat au bord de la piscine de votre villa, vous vous relaxez en regardant la mer…. Mais votre tranquillité est soudainement perturbée par la sonnerie agressive de votre téléphone. C’est votre big boss Jason. Il  veut vous voir tout de suite pour constituer la liste définitive des Argonautes avec lui.
+      Mince, vous avez oublié de le prévenir de votre départ pour les îles ! Pas question d’envoyer un papyrus par coursier, cela prendrait des semaines. Pas de panique, vous allez réaliser une application web dynamique comprenant un formulaire de saisie où vous et Jason ajouterez en temps réel la liste des candidats. Un peu d’acronyme CRUD, le tout enrobé dans un joli CSS, et le tour est joué.
+      Qui aurait cru que la technologie était aussi avancée en Grèce antique ?
+    </p>
+  </div>
+
   <!-- New member form -->
   <h2>Ajouter un(e) Argonaute</h2>
   <form class="new-member-form" action="home" method="POST">
     <label for="name">Nom de l&apos;Argonaute</label>
-    <input id="name" name="name" type="text" placeholder="Charalampos" autocomplete="off" />
+    <input id="name" name="name" type="text" placeholder="Charalampos" autocomplete="off"/>
     <button type="submit">Envoyer</button>
   </form>
 
   <!-- Affichage des messages -->
   <div id="msg">
-                <?php
-                if (!empty($_SESSION['erreur'])) {
-                    echo '<div class="error-msg" role="alert">
-                ' . $_SESSION['erreur'] . '
-              </div>';
-                    $_SESSION['erreur'] = "";
-                }
-
-                if (!empty($_SESSION['message'])) {
-                    echo '<div class="success-msg" role="alert">
-                ' . $_SESSION['message'] . '
-              </div>';
-                    $_SESSION['message'] = "";
-                }
-                ?>
-    </div>
+    <?php
+    if (!empty($_GET['msg'])) {echo '<div class="success-msg">' . $_GET['msg'] . '</div>';
+      }elseif (!empty($_GET['error-msg'])) {echo '<div class="error-msg">' . $_GET['error-msg'] . '</div>';
+    }
+    ?>
+  </div>
   
   <!-- Member list -->
 
   <h2>Membres de l'équipage</h2>
+
+  <ul class="member-list">
   <?php foreach ($result as $member) {
   ?> 
-  <ul class="member-list">
     <li class="member-item"><?= $member['name']?></li>
-  </ul>
   <?php
   }
   ?>
+  </ul>
+
 
 </main>
 
